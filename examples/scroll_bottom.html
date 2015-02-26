@@ -5,7 +5,7 @@
     <!== jquery should be provided by perfect-scrollbar's bower dependencies ==>
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/angular/angular.min.js"></script>
-    <script src="../bower_components/perfect-scrollbar/min/perfect-scrollbar.with-mousewheel.min.js"></script>
+    <script src="../bower_components/perfect-scrollbar/min/perfect-scrollbar.min.js"></script>
     <script src="../src/angular-perfect-scrollbar.js"></script>
     <style>
         .scroller {
@@ -64,8 +64,7 @@
 </perfect-scrollbar>
 <script>
     var app = angular.module('myApp', ['perfect_scrollbar']);
-
-    var ScrollCtrl = function ($scope) {
+    app.controller('ScrollCtrl', ['$scope', function ($scope) {
         $scope.someArray = [1, 2, 3];
 
         $scope.addItem = function () {
@@ -79,8 +78,7 @@
                 $scope.someArray.pop();
             }
         };
-    };
-
+    }]);
 </script>
 </body>
 </html>
