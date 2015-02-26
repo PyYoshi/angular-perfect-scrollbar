@@ -1,34 +1,31 @@
 {
   "name": "perfect-scrollbar",
-  "version": "0.4.11",
+  "version": "0.5.9",
   "homepage": "http://noraesae.github.io/perfect-scrollbar/",
   "authors": [
-    "Hyeonje Alex Jun <me@noraesae.net>"
+    "Hyunje Alex Jun <me@noraesae.net>"
   ],
   "description": "Tiny but perfect jQuery scrollbar plugin",
   "main": [
-    "min/perfect-scrollbar.min.css",
-    "min/perfect-scrollbar.min.js",
-    "min/perfect-scrollbar.with-mousewheel.min.js"
+    "src/perfect-scrollbar.css",
+    "src/perfect-scrollbar.js"
   ],
   "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ],
   "dependencies": {
     "jquery": ">=1.10"
   },
-  "_release": "0.4.11",
+  "_release": "0.5.9",
   "_resolution": {
     "type": "version",
-    "tag": "0.4.11",
-    "commit": "57d393315f211017bc25502bc2672ef3317f1e86"
+    "tag": "0.5.9",
+    "commit": "f6af3e071110bc09294fb950959051a079897582"
   },
-  "_source": "git://github.com/noraesae/perfect-scrollbar.git",
-  "_target": "~0.4.11",
+  "_source": "git://github.com/noraesae/perfect-scrollbar-bower.git",
+  "_target": "~0.5.9",
   "_originalSource": "perfect-scrollbar"
 }

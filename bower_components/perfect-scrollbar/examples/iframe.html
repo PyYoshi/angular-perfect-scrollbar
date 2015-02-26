@@ -7,23 +7,21 @@
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
       <script src="../src/perfect-scrollbar.js"></script>
       <style>
-        .contentHolder { position:relative; margin:0px auto; padding:0px; width: 600px; height: 400px; overflow: hidden; }
-        .contentHolder .content { background-image: url('./azusa.jpg'); width: 1280px; height: 720px; }
-        .spacer { text-align:center }
-
+        #iframe { width: 100%; min-height: 450px; border: 0; }
         html { direction: rtl; }
       </style>
     <script>
       jQuery(document).ready(function ($) {
         "use strict";
-        $('#Default').perfectScrollbar();
+        $('#iframe').load(function() {
+          var contentIframe = $(this).contents();
+          var documentIframe = contentIframe.get(0);
+          $('#Default', documentIframe).perfectScrollbar();
+        });
       });
     </script>
   </head>
   <body>
-    <div id="Default" class="contentHolder">
-      <div class="content">
-      </div>
-    </div>
+    <iframe src="iframe-content.html" id="iframe"></iframe>
   </body>
 </html>
