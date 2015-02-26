@@ -1,5 +1,5 @@
 angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
-    ['$parse', '$window', function ($parse, $window) {
+    ['$parse', '$window', '$timeout', function ($parse, $window, $timeout) {
         var psOptions = [
             'wheelSpeed', 'wheelPropagation', 'minScrollbarLength', 'useBothWheelAxes',
             'useKeyboard', 'suppressScrollX', 'suppressScrollY', 'scrollXMarginOffset',
@@ -11,6 +11,10 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
             transclude: true,
             template: '<div><div ng-transclude></div></div>',
             replace: true,
+            scope: {
+                scrollTop: "=",
+                scrollBottom: "="
+            },
             link: function ($scope, $elem, $attr) {
                 var jqWindow = angular.element($window);
                 var options = {};
@@ -68,6 +72,23 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
                     $elem.perfectScrollbar('destroy');
                 });
 
+                $scope.$watchCollection('scrollTop', function (newValue) {
+                    if (newValue) {
+                        $timeout(function () { // NOTICE: 暫定的にtimeoutで非同期を回避
+                            $elem[0].scrollTop = 0;
+                            $elem.perfectScrollbar('update');
+                        }, 100)
+                    }
+                });
+
+                $scope.$watchCollection('scrollBottom', function (newValue) {
+                    if (newValue) {
+                        $timeout(function () { // NOTICE: 暫定的にtimeoutで非同期を回避
+                            $elem[0].scrollTop = $elem[0].scrollHeight;
+                            $elem.perfectScrollbar('update');
+                        }, 100)
+                    }
+                });
             }
         };
     }]);
