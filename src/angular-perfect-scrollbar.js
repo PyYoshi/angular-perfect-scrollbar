@@ -28,10 +28,10 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
 
                 $scope.$evalAsync(function () {
                     $elem.perfectScrollbar(options);
-                    var onScrollHandler = $parse($attr.onScroll)
+                    var onScrollHandler = $parse($attr.onScroll);
                     $elem.scroll(function () {
-                        var scrollTop = $elem.scrollTop()
-                        var scrollHeight = $elem.prop('scrollHeight') - $elem.height()
+                        var scrollTop = $elem.scrollTop();
+                        var scrollHeight = $elem.prop('scrollHeight') - $elem.height();
                         $scope.$apply(function () {
                             onScrollHandler($scope, {
                                 scrollTop: scrollTop,
@@ -77,7 +77,7 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
                         $timeout(function () { // NOTICE: 暫定的にtimeoutで非同期を回避
                             $elem[0].scrollTop = 0;
                             $elem.perfectScrollbar('update');
-                        }, 100)
+                        }, 100);
                     }
                 });
 
@@ -86,7 +86,7 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
                         $timeout(function () { // NOTICE: 暫定的にtimeoutで非同期を回避
                             $elem[0].scrollTop = $elem[0].scrollHeight;
                             $elem.perfectScrollbar('update');
-                        }, 100)
+                        }, 100);
                     }
                 });
             }
