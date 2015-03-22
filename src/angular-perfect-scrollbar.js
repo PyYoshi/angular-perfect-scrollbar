@@ -22,7 +22,9 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
             replace: true,
             scope: {
                 scrollToTop: "=",
-                scrollToBottom: "="
+                scrollToBottom: "=",
+                onTop: '&',
+                onBottom: '&'
             },
             link: function ($scope, $elem, $attr) {
                 var jqWindow = angular.element($window);
@@ -96,6 +98,18 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
                             $elem[0].scrollTop = $elem[0].scrollHeight;
                             $elem.perfectScrollbar('update');
                         }, 100);
+                    }
+                });
+
+                $elem.bind('scroll', function () {
+                    if (this.scrollTop == 0) {
+                        if ($scope.onTop) {
+                            $scope.onTop();
+                        }
+                    }else if (this.scrollTop == this.scrollHeight - this.offsetHeight) {
+                        if ($scope.onBottom) {
+                            $scope.onBottom();
+                        }
                     }
                 });
             }
