@@ -20,7 +20,7 @@
 <body ng-app="myApp" ng-controller="ScrollCtrl">
 <button ng-click="addItem()">Add</button>
 <button ng-click="removeItem()">Remove</button>
-<perfect-scrollbar class="scroller" wheel-propagation="true" wheel-speed="50" scroll-top="someArray">
+<perfect-scrollbar class="scroller" wheel-propagation="true" wheel-speed="50" scroll-to-bottom="someArray">
 
     <div ng-repeat="times in someArray">
         {{times}}.
