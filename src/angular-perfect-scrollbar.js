@@ -21,8 +21,8 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
             template: '<div><div ng-transclude></div></div>',
             replace: true,
             scope: {
-                scrollTop: "=",
-                scrollBottom: "="
+                scrollToTop: "=",
+                scrollToBottom: "="
             },
             link: function ($scope, $elem, $attr) {
                 var jqWindow = angular.element($window);
@@ -81,7 +81,7 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
                     $elem.perfectScrollbar('destroy');
                 });
 
-                $scope.$watchCollection('scrollTop', function (newValue) {
+                $scope.$watchCollection('scrollToTop', function (newValue) {
                     if (newValue) {
                         $timeout(function () { // NOTICE: 暫定的にtimeoutで非同期を回避
                             $elem[0].scrollTop = 0;
@@ -90,7 +90,7 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
                     }
                 });
 
-                $scope.$watchCollection('scrollBottom', function (newValue) {
+                $scope.$watchCollection('scrollToBottom', function (newValue) {
                     if (newValue) {
                         $timeout(function () { // NOTICE: 暫定的にtimeoutで非同期を回避
                             $elem[0].scrollTop = $elem[0].scrollHeight;
