@@ -23,6 +23,7 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
             scope: {
                 scrollToTop: "=",
                 scrollToBottom: "=",
+                autoScrollDisabled: "=",
                 onTop: '&',
                 onBottom: '&'
             },
@@ -85,19 +86,23 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
 
                 $scope.$watchCollection('scrollToTop', function (newValue) {
                     if (newValue) {
-                        $timeout(function () { // NOTICE: 暫定的にtimeoutで非同期を回避
-                            $elem[0].scrollTop = 0;
-                            $elem.perfectScrollbar('update');
-                        }, 100);
+                        if (!$scope.autoScrollDisabled) {
+                            $timeout(function () { // NOTICE: 暫定的にtimeoutで非同期を回避
+                                $elem[0].scrollTop = 0;
+                                $elem.perfectScrollbar('update');
+                            }, 100);
+                        }
                     }
                 });
 
                 $scope.$watchCollection('scrollToBottom', function (newValue) {
                     if (newValue) {
-                        $timeout(function () { // NOTICE: 暫定的にtimeoutで非同期を回避
-                            $elem[0].scrollTop = $elem[0].scrollHeight;
-                            $elem.perfectScrollbar('update');
-                        }, 100);
+                        if (!$scope.autoScrollDisabled) {
+                            $timeout(function () { // NOTICE: 暫定的にtimeoutで非同期を回避
+                                $elem[0].scrollTop = $elem[0].scrollHeight;
+                                $elem.perfectScrollbar('update');
+                            }, 100);
+                        }
                     }
                 });
 
@@ -106,7 +111,7 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
                         if ($scope.onTop) {
                             $scope.onTop();
                         }
-                    }else if (this.scrollTop == this.scrollHeight - this.offsetHeight) {
+                    } else if (this.scrollTop == this.scrollHeight - this.offsetHeight) {
                         if ($scope.onBottom) {
                             $scope.onBottom();
                         }
