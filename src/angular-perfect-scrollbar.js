@@ -27,7 +27,20 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
                 onTop: '&',
                 onBottom: '&'
             },
-            link: function ($scope, $elem, $attr) {
+            controller: function ($scope) {
+                var element = 0;
+                this.setElement = function(el){
+                    element = el;
+                };
+
+                this.addItem = function(item){
+                    $scope.$evalAsync(function () {
+                        element.scrollTop = (element.scrollTop + item.clientHeight);
+                    });
+                };
+            },
+            link: function ($scope, $elem, $attr, $ctrl) {
+                $ctrl.setElement($elem[0]);
                 var jqWindow = angular.element($window);
                 var options = {};
 
@@ -119,4 +132,11 @@ angular.module('perfect_scrollbar', []).directive('perfectScrollbar',
                 });
             }
         };
-    }]);
+    }]).directive("psKeepScroll", function () {
+        return{
+            require : "^perfectScrollbar",
+            link : function (scope, el, att, parentCtrl) {
+                parentCtrl.addItem(el[0]);
+            }
+        }
+    });
